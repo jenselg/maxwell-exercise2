@@ -10,7 +10,7 @@ module PriceCalculator
 
         product_array = gets.chomp
         product_array = product_array.split(',')
-        product_array = product_array.map { |item| item.strip }
+        product_array = product_array.map { |item| item.to_s.downcase.strip }
 
         if product_array.size > 0
             calculate_prices(product_array)
