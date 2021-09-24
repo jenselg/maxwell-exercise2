@@ -6,7 +6,7 @@ module PriceCalculator
     # start program and get user input
     def self.init
 
-        puts "Please enter all the items purchased separated by a comma:"
+        puts "\nPlease enter all the items purchased separated by a comma:"
 
         product_array = gets.chomp
         product_array = product_array.split(',')
@@ -99,7 +99,20 @@ module PriceCalculator
 
     # get output from calculate_discounts method and build CLI table and other details
     def self.build_output(products)
-        puts products
+        puts "\n"
+        puts "Item     Quantity      Price"
+        puts "--------------------------------------"
+        products.each do |product|
+            puts "#{product["name"].ljust(9)}#{product["quantity"].to_s.ljust(13)} $#{product["total"]}"
+        end
+        puts "\n"
+
+        total_sum = products.map { |product| product["total"] }.reduce(0, :+)
+        puts "Total price : $#{total_sum}"
+
+        total_discount = products.map { |product| product["savings"] }.reduce(0, :+)
+        puts "You saved $#{total_discount} today."
+        puts "\n"
     end # self.build_output ...
 
 end # module PriceCalculator ...
